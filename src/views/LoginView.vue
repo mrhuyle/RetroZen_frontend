@@ -11,11 +11,11 @@
         </p>
         <div class="flex w-full mt-20 text-gray-600">
           <p>
-            Already have an account?
-            <RouterLink :to="{ name: 'login' }" class="underline"
+            Do not have an account?
+            <RouterLink :to="{ name: 'signup' }" class="underline"
               >Click here</RouterLink
             >
-            to log in!
+            to sign up!
           </p>
         </div>
       </div>
@@ -24,15 +24,6 @@
     <div class="main-right">
       <div class="p-12 bg-white border border-gray-200 rounded-lg h-full">
         <form class="space-y-6">
-          <div>
-            <label>Username</label><br />
-            <input
-              type="text"
-              placeholder="Your username"
-              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-            />
-          </div>
-
           <div>
             <label>E-mail</label><br />
             <input
@@ -51,15 +42,6 @@
             />
           </div>
 
-          <div>
-            <label>Repeat password</label><br />
-            <input
-              type="password"
-              placeholder="Repeat your password"
-              class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg"
-            />
-          </div>
-
           <template>
             <div class="bg-red-300 text-white rounded-lg p-6">
               <p>Error</p>
@@ -70,7 +52,7 @@
             <button
               class="py-4 px-6 bg-sky-600 text-white rounded-lg hover:bg-sky-700"
             >
-              Sign up
+              Login
             </button>
           </div>
         </form>

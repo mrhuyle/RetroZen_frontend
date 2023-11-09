@@ -2,10 +2,13 @@
   <nav class="py-10 px-8 border-b border-gray-200 bg-gray-50">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between">
-        <div class="menu-left flex items-center">
-          <img src="./assets/favicon.png" alt="" class="w-20 h-20" />
-          <a href="#" class="text-4xl font-bold text-sky-600">RetroZen</a>
-        </div>
+        <RouterLink :to="{ name: 'home' }">
+          <div class="menu-left flex items-center">
+            <img src="./assets/favicon.png" alt="" class="w-20 h-20" />
+            <a href="#" class="text-4xl font-bold text-sky-600">RetroZen</a>
+          </div>
+        </RouterLink>
+
         <div class="flex items-center gap-7">
           <div class="menu-center flex space-x-5 text-sky-700">
             <a href="#">

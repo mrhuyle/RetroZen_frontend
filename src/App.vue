@@ -1,16 +1,16 @@
 <template>
-  <nav class="py-10 px-8 border-b border-gray-200 bg-gray-50">
-    <div class="max-w-7xl mx-auto">
+  <nav class="px-8 py-10 border-b border-gray-200 bg-gray-50">
+    <div class="mx-auto max-w-7xl">
       <div class="flex items-center justify-between">
         <RouterLink :to="{ name: 'home' }">
-          <div class="menu-left flex items-center">
+          <div class="flex items-center menu-left">
             <img src="./assets/favicon.png" alt="" class="w-20 h-20" />
             <a href="#" class="text-4xl font-bold text-sky-600">RetroZen</a>
           </div>
         </RouterLink>
 
         <div class="flex items-center gap-7">
-          <div class="menu-center flex space-x-5 text-sky-700">
+          <div class="flex space-x-5 menu-center text-sky-700">
             <a href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@
             <a href="#">
               <img
                 src="https://haycafe.vn/wp-content/uploads/2022/05/Anh-songoku-cuc-chat.jpg"
-                class="rounded-full w-14 h-14 object-cover"
+                class="object-cover rounded-full w-14 h-14"
               />
             </a>
           </div>
@@ -89,6 +89,15 @@
     </div>
   </nav>
   <RouterView />
+  <Toast />
 </template>
 
-<style scoped></style>
+<script>
+  import Toast from "./components/Toast.vue";
+
+  export default {
+    components: {
+      Toast,
+    },
+  };
+</script>

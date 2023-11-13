@@ -17,6 +17,7 @@ export const useUserStore = defineStore({
 
   actions: {
     initStore() {
+      console.log(localStorage.getItem("user.access"));
       if (localStorage.getItem("user.access")) {
         this.user.access = localStorage.getItem("user.access");
         this.user.refresh = localStorage.getItem("user.refresh");
@@ -35,10 +36,12 @@ export const useUserStore = defineStore({
       console.log("setToken", data);
 
       this.user.access = data.access;
+      console.log(data.access);
       this.user.refresh = data.refresh;
       this.user.isAuthenticated = true;
 
       localStorage.setItem("user.access", data.access);
+      console.log(localStorage.getItem("user.access"));
       localStorage.setItem("user.refresh", data.refresh);
     },
 
@@ -52,11 +55,11 @@ export const useUserStore = defineStore({
       this.user.email = false;
       this.user.isAuthenticated = false;
 
-      this.user.access = localStorage.setItem("user.access", "");
-      this.user.refresh = localStorage.setItem("user.refresh", "");
-      this.user.id = localStorage.setItem("user.id", "");
-      this.user.name = localStorage.setItem("user.name", "");
-      this.user.email = localStorage.setItem("user.email", "");
+      localStorage.removeItem("user.access");
+      localStorage.removeItem("user.refresh");
+      localStorage.removeItem("user.id");
+      localStorage.removeItem("user.name");
+      localStorage.removeItem("user.email");
     },
 
     setUserInfo(user) {
@@ -74,11 +77,11 @@ export const useUserStore = defineStore({
 
     refreshToken() {
       axios
-        .post("api/auth/refresh", {
+        .post("api/refresh/", {
           refresh: this.user.refresh,
         })
         .then((response) => {
-          this.user.access = reponse.data.access;
+          this.user.access = response.data.access;
 
           localStorage.setItem("user.access", response.data.access);
 

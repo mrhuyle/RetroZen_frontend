@@ -10,7 +10,10 @@
         </RouterLink>
 
         <div class="flex items-center gap-7">
-          <div class="flex space-x-5 menu-center text-sky-700">
+          <div
+            class="flex space-x-5 menu-center text-sky-700"
+            v-if="userStore.user.isAuthenticated"
+          >
             <a href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,14 +79,32 @@
               </svg>
             </a>
           </div>
-          <div class="menu-right">
+          <template class="menu-right" v-if="userStore.user.isAuthenticated">
             <a href="#">
               <img
                 src="https://haycafe.vn/wp-content/uploads/2022/05/Anh-songoku-cuc-chat.jpg"
                 class="object-cover rounded-full w-14 h-14"
               />
             </a>
-          </div>
+          </template>
+          <template class="menu-right" v-else>
+            <RouterLink to="/login">
+              <button
+                type="button"
+                class="text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+              >
+                Login
+              </button>
+            </RouterLink>
+            <RouterLink to="/signup">
+              <button
+                type="button"
+                class="text-gray-800 hover:text-white bg-gray-300 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+              >
+                Signup
+              </button>
+            </RouterLink>
+          </template>
         </div>
       </div>
     </div>
@@ -93,9 +114,27 @@
 </template>
 
 <script>
+  import axios from "axios";
   import Toast from "./components/Toast.vue";
+  import { useUserStore } from "./stores/user";
 
   export default {
+    setup() {
+      const userStore = useUserStore();
+
+      userStore.initStore();
+
+      const token = userStore.user.access;
+
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      } else {
+        axios.defaults.headers.common["Authorization"] = null;
+      }
+      console.log(token);
+      return { userStore };
+    },
+
     components: {
       Toast,
     },

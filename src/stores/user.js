@@ -86,7 +86,7 @@ export const useUserStore = defineStore({
           localStorage.setItem("user.access", response.data.access);
 
           axios.defaults.headers.common["Authorization"] =
-            "Bearer: " + response.data.access;
+            "Bearer " + response.data.access;
         })
         .catch((error) => {
           console.log(error);

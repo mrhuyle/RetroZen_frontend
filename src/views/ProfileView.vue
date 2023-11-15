@@ -1,7 +1,25 @@
 <template>
   <main class="px-8 py-6 bg-gray-100">
     <div class="grid grid-cols-4 gap-4 mx-auto max-w-7xl">
-      <div class="col-span-3 space-y-4 main-center">
+      <div class="col-span-1 main-left">
+        <div class="p-4 text-center bg-white border border-gray-200 rounded-lg">
+          <img
+            src="https://haycafe.vn/wp-content/uploads/2022/05/Anh-songoku-cuc-chat.jpg"
+            class="object-cover mb-6 rounded-full w-72 h-72"
+          />
+
+          <p>
+            <strong>{{ userStore.user.name }}</strong>
+          </p>
+
+          <div class="flex justify-around mt-6 space-x-8">
+            <p class="text-xs text-gray-500">182 friends</p>
+            <p class="text-xs text-gray-500">120 posts</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-2 space-y-4 main-center">
         <div class="bg-white border border-gray-200 rounded-lg">
           <form action="post" v-on:submit.prevent="submitForm">
             <div class="p-4">
@@ -127,11 +145,17 @@
   import axios from "axios";
   import PeopleYouMayKnow from "../components/PeopleYouMayKnow.vue";
   import Trends from "../components/Trends.vue";
+  import { useUserStore } from "../stores/user";
 
   export default {
     name: "FeedView",
     components: PeopleYouMayKnow,
     components: { PeopleYouMayKnow, Trends },
+
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
+    },
 
     data() {
       return {
@@ -146,7 +170,7 @@
     methods: {
       getFeed() {
         axios
-          .get("api/posts/")
+          .get(`api/posts/profile/${this.$route.params.id}`)
           .then((response) => {
             console.log("data", response.data);
             this.posts = response.data;

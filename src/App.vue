@@ -80,13 +80,16 @@
             </a>
           </div>
           <template class="menu-right" v-if="userStore.user.isAuthenticated">
-            <a href="#">
+            <RouterLink
+              :to="{ name: 'profile', params: { id: userStore.user.id } }"
+            >
               <img
                 src="https://haycafe.vn/wp-content/uploads/2022/05/Anh-songoku-cuc-chat.jpg"
                 class="object-cover rounded-full w-14 h-14"
               />
-            </a>
+            </RouterLink>
           </template>
+
           <template class="menu-right" v-else>
             <RouterLink to="/login">
               <button
